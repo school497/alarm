@@ -23,6 +23,32 @@ import math
 class AlarmClockApp:
     def __init__(self):
         self.root = tk.Tk()
+        
+        # Get screen dimensions
+        self.screen_width = self.root.winfo_screenwidth()
+        self.screen_height = self.root.winfo_screenheight()
+        
+        # Calculate scaling factors relative to design resolution of 800x480
+        self.scale_x = self.screen_width / 800
+        self.scale_y = self.screen_height / 480
+        self.scale_factor = min(self.scale_x, self.scale_y)  # Use smaller scale to maintain aspect ratio
+        
+        # Create dynamic font sizes based on screen resolution
+        self.font_sizes = {
+            'huge': int(96 * self.scale_factor),
+            'large': int(48 * self.scale_factor),
+            'medium': int(24 * self.scale_factor),
+            'small': int(16 * self.scale_factor),
+            'tiny': int(12 * self.scale_factor)
+        }
+        
+        # Create dynamic padding/margins based on screen resolution
+        self.padding = {
+            'large': int(40 * self.scale_factor),
+            'medium': int(20 * self.scale_factor),
+            'small': int(10 * self.scale_factor),
+            'tiny': int(5 * self.scale_factor)
+        }
         self.root.title("Aero Alarm")
         self.root.geometry("800x480")
         self.root.configure(bg='#e0f0ff')  # Light blue background
